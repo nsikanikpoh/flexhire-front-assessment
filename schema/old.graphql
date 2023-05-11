@@ -1,0 +1,83 @@
+type Query {
+    currentUser: CurrentUser
+}
+ 
+type CurrentUser {
+    id: ID!   
+      name: String! 
+      email: String!
+      avatarUrl: String!
+      name: String!
+      status: String!
+      profile: Profile
+      userSkills:[UserSkill!]
+      answers: [Video!]
+  }
+  
+  type Profile {
+      id: ID!
+      fullAddress: String!
+      locationLatitude: Float
+      locationLongitude: Float
+      jobTypes: [String!]
+      textIntroduction: String!
+      totalExperience: Int!
+      freelancerRate: Money
+      rateMode: RateMode
+      freelancerType:FreelancerType!
+      
+  }
+
+  enum RateMode {
+      day
+      hour
+      month
+      week
+      year
+  }
+
+  type Money {
+  currency: Currency!
+  value: Float!
+  }
+
+  type Currency {
+  symbol: String
+  }
+  
+  type FreelancerType {
+    id: ID!
+    name: String!
+    skills: [Skill!]
+  }
+  
+  type UserSkill {
+    id: ID!
+    experience: String!
+    skill: Skill!
+  }
+  type Skill {
+    id: ID!
+    name: String!
+    slug: String!
+  }
+  
+  type Video {
+    available: Boolean!
+    createdAt: String
+    id: ID!
+    optimizedUrl: String!
+    posterUrl: String
+    public: Boolean!
+    question: Question
+    url: String!
+  }
+  
+  type Question {
+    answersCount: Int
+    description: String
+    jobsCount: Int
+    maxDuration: Int
+    rawId: Int
+    title: String
+  }

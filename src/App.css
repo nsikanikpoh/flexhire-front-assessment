@@ -1,6 +1,10 @@
 .App {
   text-align: center;
 }
+video{
+  -webkit-filter:hue-rotate(152deg) blur(0px);
+  filter: hue-rotate(152deg)  blur(0px);
+}
 
 .App-logo {
   height: 40vmin;
