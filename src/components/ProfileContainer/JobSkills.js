@@ -1,18 +1,9 @@
 import React from 'react'
 import {Box} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import useStyles from '../../styles/styles';
 import { useFragment } from 'react-relay';
 import graphql from 'babel-plugin-relay/macro';
-
-const StyledTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))({
-  [`& .${tooltipClasses.tooltip}`]: {
-    maxWidth: 'none',maxHeight: 'none', fontWeight:'bold', p:2,
-  },
-});
+import JobSkill from './JobSkill';
 
 export default function JobSkills({node }){
     const classes = useStyles();
@@ -34,13 +25,7 @@ export default function JobSkills({node }){
         <Box className={classes.jobSkillContainer}>
                 {
                   data?.jobSkills?.map((jobSkill, index) =>(
-                    <StyledTooltip  
-                      title={`${jobSkill.skill.name} ${jobSkill.requiredYears} yrs ${jobSkill.required ? 'required' : ''}`} 
-                       placement='bottom' key={index}>
-                      <Box key={jobSkill.skill.id} className={classes.skillBox}>
-                        {jobSkill.skill.name}
-                      </Box>
-                    </StyledTooltip>
+                    <JobSkill jobSkill={jobSkill} key={index}/>
                   ))
                 }
               </Box>

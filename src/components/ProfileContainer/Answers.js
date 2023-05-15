@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, CardMedia, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import { listToMatrix } from '../../utils/utilities';
-import useStyles from '../../styles/styles';
 import Answer from './Answer';
 
 export default function Answers({answers}){
-    const classes = useStyles();
-    console.log('answers', answers);
     const [answerTiles, setAnswerTiles] = useState([])
+
     useEffect(()=>{
         if(answers.length > 0){
             const matrixes = listToMatrix(answers, 2);

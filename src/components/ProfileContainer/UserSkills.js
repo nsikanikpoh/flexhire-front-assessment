@@ -5,6 +5,7 @@ import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import useStyles from '../../styles/styles';
 import { useFragment } from 'react-relay';
 import graphql from 'babel-plugin-relay/macro';
+import UserSkill from './UserSkill';
 
 const StyledTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
@@ -32,18 +33,12 @@ export default function UserSkills({ currentUser }){
   return (
     <React.Fragment>
         <Box className={classes.skillContainer}>
-                {
-                  data?.userSkills?.map((userSkill) =>(
-                    <StyledTooltip key={userSkill.id} 
-                      title={`${userSkill.skill.name} (skill, ${userSkill.experience + '+ years experience'})`} 
-                       placement='bottom'>
-                      <Box className={classes.skillBox}>
-                        {userSkill.skill.name} {userSkill.experience + '+ yrs'}
-                      </Box>
-                    </StyledTooltip>
-                  ))
-                }
-              </Box>
+            {
+              data?.userSkills?.map((userSkill, ind) =>(
+                <UserSkill userSkill={userSkill} key={ind}/>
+              ))
+            }
+          </Box>
     </React.Fragment>
         
   )

@@ -58,6 +58,7 @@ const styles = (theme) => {
     },
     profileContainer:{
       position:'relative',
+      width:'100%',
       justifyContent: 'center',
       alignItems: 'center',
       display:'flex',
@@ -96,7 +97,7 @@ const styles = (theme) => {
       alignItems: 'center',
       justifyContent: 'center',
       gap: '10px',
-      width: '80%',
+      width: '100%',
       marginTop: '20px'
     },
     skillBox: {
@@ -147,6 +148,7 @@ const styles = (theme) => {
       flexDirection: 'column',
       marginTop: '50px',
       marginBottom:'20px',
+      width:'90%',
       gap:'30px',
     },   
     footerContainer: {

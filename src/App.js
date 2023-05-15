@@ -18,7 +18,7 @@ const theme = createTheme({
 const App = ({preloadedQuery}) => {
   const [isMobile, setIsMobile] = useState(false)
   const [flexKey, setFlexKey] = useState(flexhireApiKey);
-  const [ref, loadQuery] = useQueryLoader(currentUserProfileQuery, preloadedQuery);
+  const [queryReference, loadQuery] = useQueryLoader(currentUserProfileQuery, preloadedQuery);
   
   const handleResize = () => {
     if (window.innerWidth < 720) {
@@ -39,12 +39,8 @@ const App = ({preloadedQuery}) => {
   }
 
   const loadNewData = (inputKey) => {
-    console.log(inputKey)
-    setFlexKey(inputKey);
     loadQuery({flexhireApiKey: inputKey});
-    console.log('loaded')
   }
-
 
   return (
     <React.Fragment>
@@ -55,8 +51,7 @@ const App = ({preloadedQuery}) => {
             </Typography>
             )}>
             <Container maxWidth={isMobile ? 'sm' : undefined}>
-                <ProfileContainer preloadedQuery={ref} loadNewData={loadNewData} isMobile={isMobile}/>       
-                    
+                <ProfileContainer queryReference={queryReference} loadNewData={loadNewData} isMobile={isMobile}/>              
             </Container>
           <Footer /> 
           </ErrorBoundary> 

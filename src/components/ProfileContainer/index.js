@@ -5,27 +5,28 @@ import { currentUserProfileQuery } from '../../relayGraphQL/Queries/currentUserP
 import {  usePreloadedQuery } from 'react-relay/hooks';
 import Profile from './Profile';
 
-const ProfileContainer = ({ preloadedQuery, loadNewData }) => {
+const ProfileContainer = ({ queryReference, loadNewData }) => {
   const classes = useStyles();
   const [apiKey, setApiKey ] = useState('')
   const [errorMessage, setErrorMessage] = useState('');
   const [formError, setFormError] = useState(false);
-  const data = usePreloadedQuery(currentUserProfileQuery, preloadedQuery);
+  const data = usePreloadedQuery(currentUserProfileQuery, queryReference);
   const { currentUser } = data; 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   if(apiKey.length < 14){
-      setFormError(!formError)
-      setErrorMessage('Please enter a valid Flexhire API key')
-      setTimeout(()=>{
-        setFormError(false);
-        setErrorMessage('');
-      }, 5000);
-   }else{
-      //send API call
-      loadNewData(apiKey);
-   }
+    if(apiKey.length < 14){
+        setFormError(!formError)
+        setErrorMessage('Please enter a valid Flexhire API key')
+        setTimeout(()=>{
+          setFormError(false);
+          setErrorMessage('');
+        }, 5000);
+    }else{
+        //send API call
+        console.log('loadNewData');
+        loadNewData(apiKey);
+    }
   }
   
   return (

@@ -5,6 +5,7 @@ import graphql from 'babel-plugin-relay/macro';
 import Answers from './Answers';
 import { Box } from '@mui/material';
 import useStyles from '../../styles/styles';
+import DisplayEmpty from './DisplayEmpty';
 
 export default function UserAnswers({currentUser, isClicked}){
   const classes = useStyles();
@@ -34,7 +35,7 @@ export default function UserAnswers({currentUser, isClicked}){
         data-cy="profile-user-answers-container"  
         sx={{display: `${isClicked ? 'block' : 'none'}`}}>
         {
-          !isEmpty(data) ? <Answers answers={data.answers}/> : ''
+          !isEmpty(data) ? <Answers answers={data.answers}/> : <DisplayEmpty title='video answers'/>
         }
        </Box>
     </React.Fragment>

@@ -16,7 +16,5 @@ describe('profile spec', () => {
     .type('343442')
     .should("have.value", '343442');
     cy.get('[data-cy="apiKey-btn"]').should('be.visible');
-
-
   })
 })

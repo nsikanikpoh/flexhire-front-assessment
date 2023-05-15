@@ -19,7 +19,7 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
       alignItems: 'center',
       justifyContent: 'center',
       gap: '20px',
-      width: '100%',
+      width: '95%',
       flexWrap: 'wrap',
       marginTop: '50px',
       marginBottom:'20px'
@@ -75,7 +75,6 @@ React.useEffect(()=>{
     setContract(data.contract);
   }
 },[data])
-// console.log('contracts', data);
 
   return (
     <React.Fragment>
@@ -93,9 +92,7 @@ React.useEffect(()=>{
             <Typography variant='h5' className={classes.jobReqtitle}>Answers to Job Contract Request</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Box className={classes.answerContainer}>
-                   <Answers answers={contract.answers}/>
-                </Box>
+              <Answers answers={contract.answers}/>
             </AccordionDetails>
         </CustomAccordion>
       }

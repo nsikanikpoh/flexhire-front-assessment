@@ -18,7 +18,6 @@ const Alert = React.forwardRef(function Alert(
 
 
 export default function SnackbarAlert({open, error}) {
-  console.log('open', open)
   const [isOpen, setisOpen ] = useState(open);
 
   useEffect(()=>{

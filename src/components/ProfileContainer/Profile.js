@@ -42,14 +42,12 @@ const Profile = ({ currentUser }) => {
 
   return (
     <Box sx={{ minHeight: '400px',display:'flex', flexDirection: 'column'}}>
-      <Map profile={data.profile}  />
-      <Grid container spacing={3} className={classes.sectionGridContainer}>
-         <Box className={classes.profileContainer}>
-              <ProfileInfo name={currentUser.name} avatarUrl={currentUser.avatarUrl} profile={data.profile}/>
-              <UserSkills currentUser={currentUser} />
-              <Tabs currentUser={currentUser}/>
-          </Box>
-      </Grid>
+      <Map profile={data?.profile}  />
+      <Box className={classes.profileContainer}>
+          <ProfileInfo name={currentUser?.name} avatarUrl={currentUser?.avatarUrl} profile={data?.profile}/>
+          <UserSkills currentUser={currentUser} />
+          <Tabs currentUser={currentUser}/>
+      </Box>
     </Box>
   );
 };

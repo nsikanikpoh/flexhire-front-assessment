@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react'
-import { Box, Grid, Button, Typography } from '@mui/material';
+import React, { useState, Fragment } from 'react'
+import { Box, Button } from '@mui/material';
 import UserAnswers from './UserAnswers';
 import JobOpportunities from './JobOpportunities';
 import useStyles from '../../styles/styles';
@@ -14,7 +14,7 @@ export default function Tabs({ currentUser }){
     }
 
   return (
-    <React.Fragment>
+    <Fragment>
         <Box width={'100%'} bgcolor={'#f8fafc'} display={'flex'} alignItems={'center'} justifyContent={'center'} 
                     alignContent={'center'}>
             <Box className={classes.tabsContainer} >
@@ -45,7 +45,7 @@ export default function Tabs({ currentUser }){
         <UserAnswers currentUser={currentUser} isClicked={tab === 'answers'}/>
 
         
-    </React.Fragment>
+    </Fragment>
         
   )
 }
