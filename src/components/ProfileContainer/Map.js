@@ -19,10 +19,10 @@ const Map = React.memo( function Map({locationLongitude, locationLatitude}){
         });
  
         const marker1 = new mapboxgl.Marker({ color: 'red', rotation: 45 })
-            .setLngLat([lat, locationLatitude])
+            .setLngLat([lat, lat])
             .addTo(map);
     
-      },[locationLatitude, lat]);
+      },[locationLatitude, locationLongitude]);
 
   return (
     <React.Fragment>
