@@ -22,7 +22,7 @@ const Map = React.memo( function Map({locationLongitude, locationLatitude}){
             .setLngLat([lat, lat])
             .addTo(map);
     
-      },[locationLatitude, locationLongitude]);
+      },[locationLongitude, locationLatitude]);
 
   return (
     <React.Fragment>
