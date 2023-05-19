@@ -14,6 +14,6 @@ describe('<UserSkill />', () => {
       }
     
     cy.mount(<UserSkill userSkill={userSkill}/>)
-    cy.contains(`${userSkill.skill.name} ${userSkill.experience} + '+ yrs'`);
+    cy.contains(`${userSkill.skill.name} ${userSkill.experience}+ yrs`);
   })
 })

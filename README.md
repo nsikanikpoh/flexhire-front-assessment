@@ -33,7 +33,7 @@ Run database migration `rails db:migrate RAILS_ENV=test`<br />
 Run test `bundle exec rspec --format documentation`<br />
 
 ### To startup the front-end 
-First run `npm install` and `npm start`. Please run react development server on a different port than 3000.<br />
+First run `npm install` and `npm start`. Please run react development server on port 3001.<br />
 
 ## To Simulate Webhook event
 Click on <b>Simulate Webhook Event</b> button in the user skills area. This simulate an update event with a payload that contains record parameter with user ID and profile ID. The frontend refeshes the profile fragment and also refeshes the user skills fragment with react transition to visualize the effect.
