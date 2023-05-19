@@ -2,27 +2,27 @@ import React from 'react'
 import {Box} from '@mui/material';
 import useStyles from '../../styles/styles';
 
-export default function Map({profile}){
+const Map = React.memo( function Map({locationLongitude, locationLatitude}){
     const classes = useStyles();
 
     React.useEffect(()=>{
         let mapboxgl = window.mapboxgl
         mapboxgl.accessToken = 'pk.eyJ1IjoibnNzbHkiLCJhIjoiY2xoZDkwaDJzMGYzYjNsbzJmdDFldmhpMiJ9.vRjlNSUxYQOiweRNDGYSIA';
-        const locationLongitude = profile?.locationLongitude ||  12.550343
-        const locationLatitude = profile?.locationLatitude ||  55.665957
+        const lng = locationLongitude ||  12.550343
+        const lat = locationLatitude ||  55.665957
     
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v12',
-            center: [locationLongitude , locationLongitude + 1],
+            center: [lng , lng + 1],
             zoom: 6
         });
  
         const marker1 = new mapboxgl.Marker({ color: 'red', rotation: 45 })
-            .setLngLat([locationLongitude, locationLatitude])
+            .setLngLat([lat, locationLatitude])
             .addTo(map);
     
-      },[profile]);
+      },[locationLatitude, lat]);
 
   return (
     <React.Fragment>
@@ -32,4 +32,6 @@ export default function Map({profile}){
     </React.Fragment>
         
   )
-}
+})
+
+export default Map;

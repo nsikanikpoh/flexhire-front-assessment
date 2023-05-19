@@ -1,16 +1,7 @@
 import React from 'react'
-import { styled } from '@mui/material/styles';
 import {Box} from '@mui/material';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import useStyles from '../../styles/styles';
-
-const StyledTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))({
-  [`& .${tooltipClasses.tooltip}`]: {
-    maxWidth: 'none',maxHeight: 'none', fontWeight:'bold', p:2,
-  },
-});
+import { StyledTooltip } from '../MuiComponents';
 
 function JobSkill({jobSkill}) {
     const classes = useStyles();

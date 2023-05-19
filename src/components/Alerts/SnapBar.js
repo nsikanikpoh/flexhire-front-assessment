@@ -16,14 +16,11 @@ const Alert = React.forwardRef(function Alert(
 });
 
 
-
-export default function SnackbarAlert({open, error}) {
-  const [isOpen, setisOpen ] = useState(open);
-
+export default function SnackbarAlert({isOpen, message, isError, clearSnapAlert}) {
   useEffect(()=>{
     if(isOpen){
       setTimeout(() => {
-        setisOpen(false);
+        clearSnapAlert();
       }, 5000);
     }
   },[isOpen]);
@@ -41,10 +38,10 @@ export default function SnackbarAlert({open, error}) {
         autoHideDuration={5000} 
         onClose={handleClose}
         TransitionComponent={SlideTransition}
-        anchorOrigin={{ vertical: 'bottom',horizontal: 'right', }}
+        anchorOrigin={{ vertical: 'top',horizontal: 'right', }}
       >
-        <Alert onClose={handleClose} severity={'error'} sx={{ width: '100%' }}>
-          {error?.message}
+        <Alert onClose={handleClose} severity={`${isError ? 'error' : 'success'}`} sx={{ width: '100%' }}>
+          {message}
         </Alert>
       </Snackbar>
     </Stack>

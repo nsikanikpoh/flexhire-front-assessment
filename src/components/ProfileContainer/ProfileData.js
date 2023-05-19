@@ -3,8 +3,9 @@ import {Typography, Avatar} from '@mui/material';
 import person from '../../assets/person.png'
 import { isEmpty } from '../../utils/utilities';
 import useStyles from '../../styles/styles';
+import LinearLoader from '../Loaders/LinearLoader';
 
-export default function ProfileData({name, avatarUrl, profile}){
+export default function ProfileData({name, avatarUrl, profile, isPending}){
   const classes = useStyles();
 
   return (
@@ -19,17 +20,22 @@ export default function ProfileData({name, avatarUrl, profile}){
                     {name} . {profile?.freelancerType?.name}
                 </Typography> 
 
-                <Typography color={'#333'} sx={{mb:1}} data-cy="profile-freelancer-rate">
-                    {profile?.jobTypes?.map((jobTyp)=>
-                          jobTyp.charAt(0).toUpperCase() + jobTyp.slice(1)).join(' or ')} 
-                    {' from '} 
-                    <strong>
-                      {profile?.freelancerRate?.value}{profile?.freelancerRate?.currency?.symbol}{'/'}
-                      {profile?.rateMode} 
-                    </strong>
-                    {' . '}
-                    { profile?.totalExperience } {' years experience'}
-                </Typography> 
+                {isPending ? <LinearLoader /> : 
+                    <>
+                      <Typography color={'#333'} sx={{mb:1}} data-cy="profile-freelancer-rate">
+                          {profile?.jobTypes?.map((jobTyp)=>
+                                jobTyp.charAt(0).toUpperCase() + jobTyp.slice(1)).join(' or ')} 
+                          {' from '} 
+                          <strong>
+                            {profile?.freelancerRate?.value}{profile?.freelancerRate?.currency?.symbol}{'/'}
+                            {profile?.rateMode} 
+                          </strong>
+                          {' . '}
+                          { profile?.totalExperience } {' years experience'}
+                      </Typography> 
+                    </>          
+                }
+
                 <Typography color={'#666'} textAlign={'center'} 
                         data-cy="profile-introduction"
                     sx={{lineHeight:'1.5em', letterSpacing:'1px', fontSize:'18px', color:'#8E97A3'}}

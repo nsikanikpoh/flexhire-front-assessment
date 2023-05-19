@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+webhook_data = WebhookData.create(clientMutationId: "b1ce42c845b5558a0a256fgfg", webhook_id: "d2ViaG9va3MtOQ==",
+                        url: "http://localhost:3000/flexhire-callback" )

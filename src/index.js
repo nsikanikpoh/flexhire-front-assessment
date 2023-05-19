@@ -16,7 +16,6 @@ import { flexhireApiKey } from './utils/utilities';
 // into our routing configuration, preloading data as we transition to new routes.
 const preloadedQuery = loadQuery(RelayEnvironment, currentUserProfileQuery, {
   /* query variables */
-  flexhireApiKey
 });
 
 

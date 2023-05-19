@@ -152,13 +152,29 @@ const styles = (theme) => {
       gap:'30px',
     },   
     footerContainer: {
+      position:'fixed',
       display: 'flex',
       alignItems: 'center',
       miHeight: '10vh',
       padding: '20px',
       justifyItems:'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      bottom:'0px',
+      textAlign: 'center',  
+      verticalAlign: 'middle', 
+      background: '#d3d3d3',
+      width: '100%'
     },
+    keyChangeBtn: {
+      padding: '12px', 
+    ':hover': {bgcolor: "#5e5e5e",color: "white"}, 
+      gap: '16px',width:'120px',
+      height: '48px',background: '#07AA1F',
+      borderRadius: '4px', cursor:'pointer', 
+      textTransform:'none',color: '#FFFFFF', fontStyle: 'normal',
+      fontWeight: 'bold',fontSize: '16px',textAlign: 'center',
+      letterSpacing: '0.02em',                        
+   },
     footerText: {
       fontFamily: 'Barlow Semi Condensed',
       fontStyle: 'normal',

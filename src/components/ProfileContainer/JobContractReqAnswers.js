@@ -1,47 +1,15 @@
 import * as React from 'react';
-import  { Accordion, AccordionSummary, AccordionDetails, Typography, Box } from '@mui/material';
+import  { AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useStyles from '../../styles/styles';
-import { styled } from '@mui/material/styles';
 import Answers from './Answers';
 import { useFragment } from 'react-relay';
 import graphql from 'babel-plugin-relay/macro';
 import { isEmpty } from '../../utils/utilities';
-
-const CustomAccordion = styled(Accordion)(({ theme }) => {
-  return {
-    boxShadow: 'none', // this styles directly apply to accordion
-    width: '100%',
-    border: 'none',
-    '.MuiAccordionDetails-root': {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '20px',
-      width: '95%',
-      flexWrap: 'wrap',
-      marginTop: '50px',
-      marginBottom:'20px'
-    },
-    '.MuiAccordionSummary-root': {
-      width: '100%',
-      display: 'flex',
-      flexFlow: 'row wrap',
-      justifyContent: 'flex-start',
-      background:'#eafaf2',
-      height:'50px',
-      marginLeft:'0px',
-
-    },
-    '&:before': {
-        backgroundColor: 'transparent !important',
-      },
-  };
-});
+import { CustomAccordion } from '../MuiComponents';
 
 
-  export default function JobContractReqAnswers({node }){
+  export default function JobContractReq({node }){
     const classes = useStyles();
     const [contract, setContract] = React.useState({contractRequests: [], answers: []})
     const data =  useFragment(graphql`

@@ -1,24 +1,20 @@
-import React from 'react'
-import {Box} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import React, { useEffect, useState, Fragment, useTransition } from 'react'
+import { Box } from '@mui/material';
 import useStyles from '../../styles/styles';
-import { useFragment } from 'react-relay';
+import { useRefetchableFragment } from 'react-relay';
+import LinearLoader from '../Loaders/LinearLoader';
 import graphql from 'babel-plugin-relay/macro';
 import UserSkill from './UserSkill';
+import simulateWebhookEvent from '../../webhookEvent/simulateWebhookEvent';
+import SnackbarAlert from '../Alerts/SnapBar';
+import { StyledButton } from '../MuiComponents';
 
-const StyledTooltip = styled(({ className, ...props }) => (
-    <Tooltip {...props} classes={{ popper: className }} />
-  ))({
-    [`& .${tooltipClasses.tooltip}`]: {
-      maxWidth: 'none',maxHeight: 'none', fontWeight:'bold', p:2,
-    },
-});
-
-export default function UserSkills({ currentUser }){
+export default function UserSkills({ currentUser, webhookData, profile }){
   const classes = useStyles();
-  const data = useFragment(graphql`
-            fragment UserSkills_user on User {
+  const [snapAlert, setSnapAlert] = useState({isOpen:false, isError:false, message:''});
+  const [isPending, startTransition] = useTransition();
+  const [data, refresh] = useRefetchableFragment(graphql`
+            fragment UserSkills_user on User @refetchable(queryName: "UserSkillsRefetchQuery") {
                 userSkills {
                   id
                   experience
@@ -29,17 +25,52 @@ export default function UserSkills({ currentUser }){
                   }
                }
             }`, currentUser);
+  
+
+useEffect(()=>{
+  if(webhookData.records.includes(currentUser.id)){
+    startTransition(()=>{
+      refresh({}, { fetchPolicy: 'network-only' })
+    });
+  }
+}, [webhookData.timestamp]);
+
+  const handleWebhookSim = (e) => {
+    e.preventDefault();
+    simulateWebhookEvent(currentUser.id, profile.id).then((resp)=>{
+        setSnapAlert({isOpen:true, isError:false, message: resp.message});
+    }).catch(err => {
+        setSnapAlert({isOpen:true, isError:true, message:err.message});
+    });
+  }
+
+  const clearSnapAlert = () => {
+    setSnapAlert({isOpen:false, isError:false, message:''});
+  }
+
 
   return (
-    <React.Fragment>
+    <Fragment>
+       <SnackbarAlert message={snapAlert.message} 
+                        isOpen={snapAlert.isOpen} isError={snapAlert.isError} 
+                        clearSnapAlert={clearSnapAlert}/>
         <Box className={classes.skillContainer}>
-            {
-              data?.userSkills?.map((userSkill, ind) =>(
-                <UserSkill userSkill={userSkill} key={ind}/>
-              ))
+            {isPending ? <LinearLoader /> : 
+              <Fragment>
+                {
+                    data?.userSkills?.map((userSkill, ind) =>(
+                      <UserSkill userSkill={userSkill} key={ind}/>
+                    ))
+                  }
+              </Fragment>
             }
-          </Box>
-    </React.Fragment>
+        </Box>
+            <StyledButton sx={{width:'auto', ':hover': { bgcolor: "#21ba45",color: "#fff"}}}
+                onClick={handleWebhookSim}
+              >
+                        Simulate Webhook Event
+            </StyledButton>
+    </Fragment>
         
   )
 }

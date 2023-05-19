@@ -11,9 +11,10 @@ export const currentUserProfileQuery = graphql`
             avatarUrl
             status
             ...UserAnswers_user
-            ...Profile_user
+            ...profileUserFragment
             ...UserSkills_user      
             ...JobOpportunities_user          
     }
   }
 `;
+

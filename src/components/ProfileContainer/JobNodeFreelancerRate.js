@@ -1,9 +1,6 @@
 import React  from 'react'
-import { Box, Grid, Button, Typography } from '@mui/material';
-import JobSkills from './JobSkills';
-import { truncateString } from '../../utils/utilities';
+import { Typography } from '@mui/material';
 import useStyles from '../../styles/styles';
-import ContractReqAnswers from './JobContractReqAnswers';
 import { useFragment } from 'react-relay';
 import graphql from 'babel-plugin-relay/macro';
 

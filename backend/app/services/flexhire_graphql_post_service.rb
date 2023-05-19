@@ -1,6 +1,6 @@
 require 'net/http'
 require 'json'
-class FlexhireGraphqlPost
+class FlexhireGraphqlPostService
 
     ALL_NET_HTTP_ERRORS = [
             Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
@@ -8,11 +8,12 @@ class FlexhireGraphqlPost
     ]
     URL = "https://api.flexhire.com/api/v2";
 
-    attr_reader :api_key, :query
+    attr_reader :api_key, :query, :variables
 
-    def initialize(api_key:, query:)
+    def initialize(api_key:, query:, variables:)
         @api_key = api_key
         @query = query
+        @variables = variables
     end
 
     def execute
@@ -20,8 +21,10 @@ class FlexhireGraphqlPost
         finalize_request(request)
     end
 
+
     private 
 
+    
     def url
         URI(URL)
     end
@@ -37,7 +40,7 @@ class FlexhireGraphqlPost
         request_object["FLEXHIRE-API-KEY"] = api_key
         request_object["Content-Type"] = 'application/json'
         request_object["Accept"] = 'application/json'
-        request_params = {'query': query, 'variables': {}  }
+        request_params = {'query': query, 'variables': variables  }
         request_object.body = request_params.to_json
         response = http.request(request_object)
         JSON.parse(response.body)

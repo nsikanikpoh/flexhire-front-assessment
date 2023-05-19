@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<06ab282c03bf12301df980948bcd6549>>
+ * @generated SignedSource<<c20ac0d1b613a413bdcb498715589ad7>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,7 +19,16 @@ var v0 = {
 return {
   "argumentDefinitions": [],
   "kind": "Fragment",
-  "metadata": null,
+  "metadata": {
+    "refetch": {
+      "connection": null,
+      "fragmentPathInResult": [
+        "node"
+      ],
+      "operation": require('./UserSkillsRefetchQuery.graphql'),
+      "identifierField": "id"
+    }
+  },
   "name": "UserSkills_user",
   "selections": [
     {
@@ -66,13 +75,14 @@ return {
         }
       ],
       "storageKey": null
-    }
+    },
+    (v0/*: any*/)
   ],
   "type": "User",
   "abstractKey": null
 };
 })();
 
-node.hash = "fd31eb1a38d91f64acb6f7c79a7aad76";
+node.hash = "f123ad0d5224d5498ca7e62686927c02";
 
 module.exports = node;

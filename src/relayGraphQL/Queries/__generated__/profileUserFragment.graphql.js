@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c3019f251ccf193aeb96036c331c058b>>
+ * @generated SignedSource<<8dab5aa4d9291302aecb4abec58266a5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -26,8 +26,17 @@ v1 = {
 return {
   "argumentDefinitions": [],
   "kind": "Fragment",
-  "metadata": null,
-  "name": "Profile_user",
+  "metadata": {
+    "refetch": {
+      "connection": null,
+      "fragmentPathInResult": [
+        "node"
+      ],
+      "operation": require('./UserProfileRefetchQuery.graphql'),
+      "identifierField": "id"
+    }
+  },
+  "name": "profileUserFragment",
   "selections": [
     {
       "alias": null,
@@ -158,13 +167,14 @@ return {
         }
       ],
       "storageKey": null
-    }
+    },
+    (v0/*: any*/)
   ],
   "type": "User",
   "abstractKey": null
 };
 })();
 
-node.hash = "8e9d1621c563c00ca46b47dcf232f986";
+node.hash = "53d9b9e713932439d7e5a47795651778";
 
 module.exports = node;

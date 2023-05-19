@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Full Stack React/React-Relay Front-end and  Rails API and Postgresql Database Back-end.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## To start up  the backend server 
+First goto into the /backend directory.
+Update the `database.yml` file in app/config directory and run `bundle install`
+Run database migration `rails db:migrate`
+Seed the database `rails db:seed`
+start up the server `rails server`
+It is expected that the rails server will run on port 3000.
 
-## Available Scripts
+I have already created a webhook on flexhire with the following details 
+```
+{
+    "data": {
+        "createWebhook": {
+            "clientMutationId": "b1ce42c845b5558a0a256fgfg",
+            "webhook": {
+                "authenticationHeaderName": null,
+                "authenticationHeaderValue": null,
+                "enabled": true,
+                "id": "d2ViaG9va3MtOQ==",
+                "url": "http://localhost:3000/flexhire-callback"
+            },
+            "errors": []
+        }
+    }
+} 
+```
 
-In the project directory, you can run:
 
-### `npm start`
+### To run Spec
+Run database migration `rails db:migrate RAILS_ENV=test`
+Run test `bundle exec rspec --format documentation`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### To startup the front-end 
+First run `npm install` and `npm start`. Please run a react-server on a different port than 3000.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## To Simulate Webhook event
+Click on Simulate Webhook Event button in the user skills area. This simulate an update event with a payload that contains record parameter with user ID and profile ID. The frontend refeshes the profile fragment and also simulates refeshing the user skills fragment.
 
-### `npm test`
+## to run the Cypress test 
+Run `npm run e2e`
+This opens up cypress and you can choose to run the component tests or the integration test.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### I look forward to hearing from you. Thanks!
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

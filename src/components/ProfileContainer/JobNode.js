@@ -1,5 +1,5 @@
 import React  from 'react'
-import { Box, Grid, Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import JobSkills from './JobSkills';
 import { truncateString } from '../../utils/utilities';
 import useStyles from '../../styles/styles';

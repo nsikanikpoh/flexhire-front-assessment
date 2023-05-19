@@ -3,6 +3,11 @@ class GraphqlController < ApplicationController
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
   # protect_from_forgery with: :null_session
+  
+  def flexhire_callback
+    FlexhireWebhookChannel.broadcast_to('flexhire_webhook_channel', webhook_params)
+    render json: {message: 'update event simulated.'}, status: :ok
+  end
 
   def execute
     variables = prepare_variables(params[:variables])
@@ -20,11 +25,13 @@ class GraphqlController < ApplicationController
   end
 
   def flexhire_api_proxy
-    render json:  {message: "FLEXHIRE-API-KEY header must be present"}, status: :unauthorized and return if request.headers['FLEXHIRE-API-KEY'].nil?
-    response = FlexhireGraphqlPost.new(api_key: request.headers['FLEXHIRE-API-KEY'], 
-                        query: params[:query]).execute
+    render json:  { message: "FLEXHIRE-API-KEY header must be present"}, 
+                    status: :unauthorized and return if request.headers['FLEXHIRE-API-KEY'].nil?
+    variables = prepare_variables(params[:variables])
+    response = FlexhireGraphqlPostService.new(api_key: request.headers['FLEXHIRE-API-KEY'], 
+                    query: params[:query], variables: variables).execute
     render json: response
-  rescue StandardError => e
+  rescue => e
     raise e unless Rails.env.development?
     handle_error_in_development(e)
   end
@@ -32,6 +39,11 @@ class GraphqlController < ApplicationController
 
   private
 
+
+  def webhook_params
+    params.permit(:event_name, :timestamp, {:records=>[]})
+  end
+  
   # Handle variables in form data, JSON body, or a blank value
   def prepare_variables(variables_param)
     case variables_param
@@ -55,7 +67,6 @@ class GraphqlController < ApplicationController
   def handle_error_in_development(e)
     logger.error e.message
     logger.error e.backtrace.join("\n")
-
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
   end
 end
